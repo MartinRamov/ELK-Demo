@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELK_VERSION}
+    container_name: ${ELASTICSEARCH_NAME}
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://elasticsearch:9200/_cluster/health"]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    networks:
+      - elastic
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:${ELK_VERSION}
+    container_name: ${LOGSTASH_NAME}
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ../../logs/monitoring.log:/tmp/monitoring.log:ro
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    networks:
+      - elastic
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    depends_on:
+      - elasticsearch
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://logstash:9600"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:${ELK_VERSION}
+    container_name: ${KIBANA_NAME}
+    volumes:
+      - ./kibana/config/:/usr/share/kibana/config:ro
+    ports:
+      - "5601:5601"
+    networks:
+      - elastic
+    depends_on:
+      - elasticsearch
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://kibana:5601/app/kibana"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+networks:
+  elastic:
+    driver: bridge
