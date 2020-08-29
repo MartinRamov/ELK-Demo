@@ -33,7 +33,10 @@ build/
 ### VS Code ###
 .vscode/
 
+src/filebeat/filebeat
 src/filebeat/data
 src/filebeat/kibana
 src/filebeat/module
 src/filebeat/modules.d
+
+.DS_Store
