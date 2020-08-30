@@ -1,10 +1,12 @@
 package com.netcetera.example.application.controller;
 
-import com.netcetera.example.application.monitoring.MonitoringService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,8 +21,25 @@ import org.springframework.web.bind.annotation.RestController;
     produces = MediaType.APPLICATION_JSON_VALUE)
 public class MonitoringController {
 
+  /**
+   * Dummy endpoint.
+   *
+   * @return the http response {@link ResponseEntity}.
+   */
   @GetMapping("/log")
-  public void test() {
-    MonitoringService.log();
+  public ResponseEntity<Void> getCreate(@RequestParam String keyword) {
+    log.info("Param: {}", keyword);
+    return ResponseEntity.ok().build();
+  }
+
+  /**
+   * Dummy endpoint.
+   *
+   * @return the http response {@link ResponseEntity}.
+   */
+  @PostMapping("/log")
+  public ResponseEntity<Void> postCreate(@RequestParam String keyword) {
+    log.info("Param: {}", keyword);
+    return ResponseEntity.ok().build();
   }
 }
