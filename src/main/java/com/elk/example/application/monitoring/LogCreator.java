@@ -1,6 +1,6 @@
-package com.netcetera.example.application.monitoring;
+package com.elk.example.application.monitoring;
 
-import com.netcetera.example.application.model.LogItem;
+import com.elk.example.application.model.LogItem;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.StringSubstitutor;
 

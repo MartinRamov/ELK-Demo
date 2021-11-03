@@ -1,7 +1,7 @@
-package com.netcetera.example.application.interceptor;
+package com.elk.example.application.interceptor;
 
-import com.netcetera.example.application.model.LogItem;
-import com.netcetera.example.application.monitoring.LogCreator;
+import com.elk.example.application.monitoring.LogCreator;
+import com.elk.example.application.model.LogItem;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

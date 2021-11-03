@@ -1,4 +1,4 @@
-package com.netcetera.example.application.model;
+package com.elk.example.application.model;
 
 import lombok.Builder;
 import lombok.Data;

@@ -18,7 +18,7 @@
     </encoder>
   </appender>
 
-  <logger name="com.netcetera.example.application.monitoring.LogCreator" level="INFO" additivity="false">
+  <logger name="com.elk.example.application.monitoring.LogCreator" level="INFO" additivity="false">
     <appender-ref ref="MONITORING"/>
   </logger>
   <root level="INFO">

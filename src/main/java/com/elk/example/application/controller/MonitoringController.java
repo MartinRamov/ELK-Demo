@@ -1,4 +1,4 @@
-package com.netcetera.example.application.controller;
+package com.elk.example.application.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
